@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TestBaristamaticRailsBootstrap</title>
+    <%= csrf_meta_tags %>
+
+    <!-- Bootstrap Core CSS -->
+    <!--<link href="bootstrap.min.css" rel="stylesheet">-->
+    <%= stylesheet_link_tag "bootstrap.min" %>
+
+    <!-- Custom CSS -->
+    <!--<link href="baristamatic.css" rel="stylesheet">-->
+    <%= stylesheet_link_tag "baristamatic" %>
+
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- jQuery -->
+    <%= javascript_include_tag 'jquery-1.11.2.min.js' %>
+    <!--<script src="jquery-1.11.2.min.js"></script>-->
+
+    <!-- Bootstrap Core JavaScript -->
+    <%= javascript_include_tag 'bootstrap.min.js' %>
+    <!--<script src="bootstrap.min.js"></script>-->
+</head>
+<body>
+<%= yield %>
+</body>
+</html>
