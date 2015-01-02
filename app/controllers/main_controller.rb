@@ -10,8 +10,7 @@ class MainController < ApplicationController
 
   def index
     puts "index: called with params - #{params}"
-    bar = BaristaServiceMem.instance
-    @inventory = bar.getInventoryAvailable
+    @inventory = BaristaServiceMem.instance.getInventoryAvailable
     @drinks = BaristaServiceMem.instance.getDrinks
   end
 

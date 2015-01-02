@@ -12,12 +12,12 @@ class BaristaServiceMem
 
   def initialize
     @drinks = [
-        DrinkMem.new(1, 'coffee', 'Coffee', {'coffee' => 3, "sugar" => 1, "cream" => 1}),
-        DrinkMem.new(2, 'decafCoffee', 'Decaf Coffee', {"decafCoffee"=> 3, "sugar" => 1, "cream"=> 1}),
-        DrinkMem.new(3, 'caffeLatte', 'Caffe Latte', {"espresso"=> 2, "steamedMilk"=>1}),
-        DrinkMem.new(4, 'caffeAmericano', 'Caffe Americano', {"espresso"=> 3}),
-        DrinkMem.new(5, 'caffeMocha', 'Caffe Mocha', {"espresso"=> 1, "cocoa" => 1, "steamedMilk"=> 1, "whippedCream"=>1}),
-        DrinkMem.new(6, 'cappuccino', 'Cappuccino', {"espresso"=> 2, "steamedMilk"=> 1, "foamedMilk"=> 1})
+        DrinkMem.new(1, 'coffee', 'Coffee', {'coffee' => 3, 'sugar' => 1, 'cream' => 1}),
+        DrinkMem.new(2, 'decafCoffee', 'Decaf Coffee', {'decafCoffee'=> 3, 'sugar' => 1, 'cream'=> 1}),
+        DrinkMem.new(3, 'caffeLatte', 'Caffe Latte', {'espresso'=> 2, 'steamedMilk'=>1}),
+        DrinkMem.new(4, 'caffeAmericano', 'Caffe Americano', {'espresso'=> 3}),
+        DrinkMem.new(5, 'caffeMocha', 'Caffe Mocha', {'espresso'=> 1, 'cocoa' => 1, 'steamedMilk'=> 1, 'whippedCream'=>1}),
+        DrinkMem.new(6, 'cappuccino', 'Cappuccino', {'espresso'=> 2, 'steamedMilk'=> 1, 'foamedMilk'=> 1})
     ]
 
     @inventory = {
@@ -32,24 +32,11 @@ class BaristaServiceMem
         'whippedCream' => InventoryEntryMem.new('Whipped Cream','whippedCream',1.00,10)
     }
 
-    #Update drink cost
+    #Calc drink cost
     @drinks.each do |drink|
       drink.cost = getDrinkCost(drink.name)
     end
 
-  end
-
-  def getDrinkCost(name)
-    recipe = @drinks.select {|drink| drink.name == name}[0].recipe
-    cost = 0.0
-    recipe.each do |ingredient, count|
-      cost += @inventory[ingredient].cost * count
-    end
-    cost.round(2)
-  end
-
-  def getDrink(drinkNumber)
-    @drinks.select {|drink| drink.number == drinkNumber.to_i}[0]
   end
 
   #Update inStock for each drink and return list
@@ -64,6 +51,29 @@ class BaristaServiceMem
     @inventory.values.sort_by {|inv| inv.displayName}
   end
 
+  def orderDrink(drinkNumber)
+    recipe = getDrink(drinkNumber).recipe
+    recipe.each do |key, value|
+      @inventory[key].consumeIngredient(value)
+    end
+
+  end
+
+  def reStockInventory
+    @inventory.values.each { |inv| inv.count = 10}
+  end
+
+  private
+
+  def getDrinkCost(name)
+    recipe = @drinks.select {|drink| drink.name == name}[0].recipe
+    cost = 0.0
+    recipe.each do |ingredient, count|
+      cost += @inventory[ingredient].cost * count
+    end
+    cost.round(2)
+  end
+
   def areIngredientsAvailable(drinkNumber)
     recipe = @drinks.select {|drink| drink.number == drinkNumber.to_i}[0].recipe
     recipe.each do |ingredient, count|
@@ -75,15 +85,7 @@ class BaristaServiceMem
     return true
   end
 
-  def orderDrink(drinkNumber)
-    recipe = getDrink(drinkNumber).recipe
-    recipe.each do |key, value|
-      @inventory[key].consumeIngredient(value)
-    end
-
-  end
-
-  def reStockInventory
-    @inventory.values.each { |inv| inv.count = 10}
+  def getDrink(drinkNumber)
+    @drinks.select {|drink| drink.number == drinkNumber.to_i}[0]
   end
 end

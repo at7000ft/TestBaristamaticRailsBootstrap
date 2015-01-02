@@ -30,7 +30,7 @@ class BaristaServiceMemTest < ActiveSupport::TestCase
 
     #
     serviceMem.orderDrink('1')
-    inv = serviceMem.getInventoryAvailable.select {|inv| inv.name == 'coffee'}[0]
+    inv = serviceMem.getInventoryAvailable.select {|inv_item| inv_item.name == 'coffee'}[0]
     assert_equal(inv.count, 7)
 
     #
@@ -46,15 +46,15 @@ class BaristaServiceMemTest < ActiveSupport::TestCase
     #
     drinks = serviceMem.getDrinks
     assert_equal(drinks.size, 6)
-    assert_equal(false, drinks.select {|drink| drink.number == 1}[0].inStock)
-    assert_equal(true, drinks.select {|drink| drink.number == 2}[0].inStock)
-    assert_equal(true, drinks.select {|drink| drink.number == 3}[0].inStock)
-    assert_equal(true, drinks.select {|drink| drink.number == 4}[0].inStock)
-    assert_equal(true, drinks.select {|drink| drink.number == 5}[0].inStock)
-    assert_equal(true, drinks.select {|drink| drink.number == 6}[0].inStock)
+    assert_equal(false, drinks.select {|drnk| drnk.number == 1}[0].inStock)
+    assert_equal(true, drinks.select {|drnk| drnk.number == 2}[0].inStock)
+    assert_equal(true, drinks.select {|drnk| drnk.number == 3}[0].inStock)
+    assert_equal(true, drinks.select {|drnk| drnk.number == 4}[0].inStock)
+    assert_equal(true, drinks.select {|drnk| drnk.number == 5}[0].inStock)
+    assert_equal(true, drinks.select {|drnk| drnk.number == 6}[0].inStock)
     serviceMem.reStockInventory
     drinks = serviceMem.getDrinks
-    assert_equal(true, drinks.select {|drink| drink.number == 1}[0].inStock)
+    assert_equal(true, drinks.select {|drnk| drnk.number == 1}[0].inStock)
 
   end
 

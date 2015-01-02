@@ -17,7 +17,7 @@ class DrinkMem
   end
 
   def to_s
-    "number: #@number name: #@name "
+    "number: #{@number} name: #{@name} "
   end
 
 
