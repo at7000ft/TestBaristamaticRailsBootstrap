@@ -1,7 +1,15 @@
+#
+# Title: MainController
+# Description: Main Baristamatic controller
+#
+# Author: rholl00
+# Date: 12/10/14
+#
+
 class MainController < ApplicationController
 
   def index
-    puts "index: called"
+    puts "index: called with params - #{params}"
     bar = BaristaServiceMem.instance
     @inventory = bar.getInventoryAvailable
     @drinks = BaristaServiceMem.instance.getDrinks

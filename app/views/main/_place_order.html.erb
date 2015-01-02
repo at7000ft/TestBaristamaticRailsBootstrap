@@ -1,8 +1,8 @@
+<%# Title: _place_order.html.erb %>
+<%# Order partial page %>
+<%# Author: RH %>
 
-<script>
-
-</script>
-
+<a name="buyAnchor"></a>
 <div class="row">
     <div class="box">
         <div class="col-md-2"></div>
@@ -12,6 +12,7 @@
                 <strong>order</strong>
             </h2>
             <hr>
+
             <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
@@ -29,7 +30,8 @@
                        <td><%= drink.displayName %></td>
                        <td><%= number_to_currency(drink.cost) %></td>
                        <td data-halign="center" data-align="center"><%= drink.inStock ? 'Yes' : 'No' %></td>
-                       <td><%= link_to 'Buy', {controller: 'main', action: 'buy', number: drink.number}, :class => 'buy-btn btn btn-large btn-primary', :disabled => !drink.inStock %></td>
+                       <%# Adding the anchor: parameter will add a # (jump to) in the redirect url that causes the page to jump to this buy section of the page %>
+                       <td><%= link_to 'Buy', {controller: 'main', action: 'buy', number: drink.number, anchor: 'buyAnchor'}, :class => 'buy-btn btn btn-large btn-primary', :disabled => !drink.inStock %></td>
                    </tr>
                 <% end %>
             </table>
