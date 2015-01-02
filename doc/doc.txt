@@ -16,3 +16,8 @@ rails g model Drink number:integer name:string displayName:string
 http://blog.mongodb.org/post/53271876885/ruby-rails-mongodb-and-the-object-relational
 http://mongomapper.com/documentation/getting-started/rails.html
 http://www.bitzesty.com/blog/2014/7/mongodb-with-mongomapper-and-ruby-on-rails
+
+
+#
+# View app routes in browser (ONLY visible in the development environment)
+http://localhost:3000/rails/info/routes
